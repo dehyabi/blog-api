@@ -24,10 +24,11 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => Hash::make('password'), // Default password for testing
+            'api_token' => Str::random(60), // Generate a unique token for each user
             'remember_token' => Str::random(10),
         ];
     }
@@ -42,3 +43,4 @@ class UserFactory extends Factory
         ]);
     }
 }
+
